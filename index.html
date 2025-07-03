@@ -55,13 +55,13 @@
             console.log('Is iPhone Safari?', isIphoneSafari);
             
             // Update message and instruction
-            document.getElementById('message').innerHTML = 'Tap the image to view <span class="highlight">COURT50F.usdz</span> in AR!';
-            document.getElementById('ar-instruction').innerHTML = 'Tap the image to view <span class="highlight">COURT50F.usdz</span> in AR!';
+            document.getElementById('message').innerHTML = 'Former Fanling Magistracy';
+            document.getElementById('ar-instruction').innerHTML = 'Tap the image to view Former Fanling Magistracy in AR!';
             
             // Update manual link text based on device
             if (isIphoneSafari) {
                 console.log('Setting manual link text for iPhone Safari');
-                document.getElementById('manual-link').innerHTML = 'tap here to view in <span class="highlight">AR</span>';
+                document.getElementById('manual-link').innerHTML = 'tap here to view in AR';
             } else {
                 console.log('Setting manual link text for other devices');
                 document.getElementById('manual-link').innerText = 'click here to view the model';
