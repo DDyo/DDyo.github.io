@@ -3,21 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Download USDZ</title>
+    <title>AR Quick Look or Download USDZ</title>
     <script>
-        // JavaScript to trigger download on page load
+        // JavaScript to trigger AR Quick Look for iPhone Safari or download for others
         window.onload = function() {
+            const isIphoneSafari = /iPhone.*Safari/i.test(navigator.userAgent);
             const link = document.createElement('a');
-            link.href = 'COURT50F.usdz'; // Path to your USDZ file
-            link.download = 'COURT50F.usdz'; // File name for download
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            link.href = 'xxx.usdz'; // Path to your USDZ file
+            
+            if (isIphoneSafari) {
+                // For iPhone Safari, trigger AR Quick Look
+                link.setAttribute('rel', 'ar');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                // Update message for iPhone users
+                document.getElementById('message').innerText = 'Opening xxx.usdz in AR Quick Look...';
+            } else {
+                // For other devices, trigger download
+                link.download = 'xxx.usdz'; // File name for download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                // Update message for non-iPhone users
+                document.getElementById('message').innerText = 'Downloading xxx.usdz...';
+            }
         };
     </script>
 </head>
 <body>
-    <h1>Downloading COURT50F.usdz...</h1>
-    <p>If the download doesn't start, <a href="COURT50F.usdz" download>click here</a> to download the file manually.</p>
+    <h1 id="message">Processing xxx.usdz...</h1>
+    <p>If the action doesn't start, 
+        <a href="xxx.usdz" rel="ar" id="manual-link">click here to view in AR</a> or 
+        <a href="xxx.usdz" download>click here to download</a>.
+    </p>
+    <script>
+        // Update manual link text based on device
+        if (/iPhone.*Safari/i.test(navigator.userAgent)) {
+            document.getElementById('manual-link').innerText = 'click here to view in AR';
+        } else {
+            document.getElementById('manual-link').innerText = 'click here to view the model';
+        }
+    </script>
 </body>
 </html>
