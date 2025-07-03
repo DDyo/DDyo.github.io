@@ -15,6 +15,7 @@
         h1 {
             color: #333;
             font-size: 1.8em;
+            margin-bottom: 15px;
         }
         p {
             font-size: 1.2em;
@@ -32,57 +33,47 @@
             color: #d32f2f;
             font-weight: bold;
         }
-        #tap-instruction {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            font-size: 1.6em;
-            font-weight: bold;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            pointer-events: none; /* Prevents interaction with the message */
+        #ar-image {
+            max-width: 80%;
+            height: auto;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
         }
-        #tap-instruction.show {
-            opacity: 1;
+        #ar-instruction {
+            font-size: 1.4em;
+            color: #333;
+            margin: 10px 0;
+        }
+        .iphone-only {
+            display: none;
+        }
+        /* Show iPhone-specific elements only on iPhone Safari */
+        @media (max-width: 768px) {
+            .iphone-only {
+                display: block;
+            }
         }
     </style>
     <script>
-        // JavaScript to trigger AR Quick Look for iPhone Safari or download for others
+        // JavaScript to handle iPhone Safari display or download for others
         window.onload = function() {
             console.log('Page loaded. User agent:', navigator.userAgent);
             setTimeout(function() {
                 const isIphoneSafari = /iPhone.*Safari/i.test(navigator.userAgent);
                 console.log('Is iPhone Safari?', isIphoneSafari);
                 
-                const link = document.createElement('a');
-                link.href = 'COURT50F.usdz'; // Path to your USDZ file
-                
                 if (isIphoneSafari) {
-                    // For iPhone Safari, trigger AR Quick Look
-                    console.log('Triggering AR Quick Look for COURT50F.usdz');
-                    link.setAttribute('rel', 'ar');
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    // Show tap instruction
-                    const tapInstruction = document.getElementById('tap-instruction');
-                    tapInstruction.classList.add('show');
-                    console.log('Showing tap instruction');
-                    setTimeout(() => {
-                        tapInstruction.classList.remove('show');
-                        console.log('Hiding tap instruction');
-                    }, 5000); // Hide after 5 seconds
-                    // Update message for iPhone users
-                    document.getElementById('message').innerHTML = 'Tap the preview to view <span class="highlight">COURT50F.usdz</span> in AR!';
+                    // For iPhone Safari, show image and instruction
+                    console.log('Showing image and AR instruction for iPhone Safari');
+                    document.getElementById('message').innerHTML = 'Tap the image to view <span class="highlight">Former Fanling Magistracy</span> in AR!';
+                    document.getElementById('ar-container').classList.add('iphone-only');
                 } else {
                     // For other devices, trigger download
                     console.log('Triggering download for COURT50F.usdz');
+                    const link = document.createElement('a');
+                    link.href = 'COURT50F.usdz'; // Path to your USDZ file
                     link.download = 'COURT50F.usdz'; // File name for download
                     document.body.appendChild(link);
                     link.click();
@@ -96,11 +87,16 @@
 </head>
 <body>
     <h1 id="message">Processing COURT50F.usdz...</h1>
+    <div id="ar-container" class="iphone-only">
+        <a href="COURT50F.usdz" rel="ar">
+            <img id="ar-image" src="court.jpg" alt="Preview of COURT50F.usdz">
+        </a>
+        <div id="ar-instruction">Tap the image to view <span class="highlight">Fan</span> in AR!</div>
+    </div>
     <p>If the action doesn't start, 
         <a href="COURT50F.usdz" rel="ar" id="manual-link">tap here to view in AR</a> or 
         <a href="COURT50F.usdz" download>click here to download</a>.
     </p>
-    <div id="tap-instruction">Tap to open AR!</div>
     <script>
         // Update manual link text based on device
         if (/iPhone.*Safari/i.test(navigator.userAgent)) {
