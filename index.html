@@ -46,66 +46,38 @@
             color: #333;
             margin: 10px 0;
         }
-        .iphone-only {
-            display: none;
-        }
-        /* Show iPhone-specific elements only on iPhone Safari */
-        @media (max-width: 768px) {
-            .iphone-only {
-                display: block;
-            }
-        }
     </style>
     <script>
-        // JavaScript to handle iPhone Safari display or download for others
+        // JavaScript to log user agent and update link text
         window.onload = function() {
             console.log('Page loaded. User agent:', navigator.userAgent);
-            setTimeout(function() {
-                const isIphoneSafari = /iPhone.*Safari/i.test(navigator.userAgent);
-                console.log('Is iPhone Safari?', isIphoneSafari);
-                
-                if (isIphoneSafari) {
-                    // For iPhone Safari, show image and instruction
-                    console.log('Showing image and AR instruction for iPhone Safari');
-                    document.getElementById('message').innerHTML = 'Tap the image to view <span class="highlight">Former Fanling Magistracy</span> in AR!';
-                    document.getElementById('ar-container').classList.add('iphone-only');
-                } else {
-                    // For other devices, trigger download
-                    console.log('Triggering download for COURT50F.usdz');
-                    const link = document.createElement('a');
-                    link.href = 'COURT50F.usdz'; // Path to your USDZ file
-                    link.download = 'COURT50F.usdz'; // File name for download
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    // Update message for non-iPhone users
-                    document.getElementById('message').innerText = 'Downloading COURT50F.usdz...';
-                }
-            }, 1000); // 1000ms delay to ensure page load
+            const isIphoneSafari = /iPhone.*Safari/i.test(navigator.userAgent);
+            console.log('Is iPhone Safari?', isIphoneSafari);
+            
+            // Update message and instruction
+            document.getElementById('message').innerHTML = 'Tap the image to view <span class="highlight">COURT50F.usdz</span> in AR!';
+            document.getElementById('ar-instruction').innerHTML = 'Tap the image to view <span class="highlight">COURT50F.usdz</span> in AR!';
+            
+            // Update manual link text based on device
+            if (isIphoneSafari) {
+                console.log('Setting manual link text for iPhone Safari');
+                document.getElementById('manual-link').innerHTML = 'tap here to view in <span class="highlight">AR</span>';
+            } else {
+                console.log('Setting manual link text for other devices');
+                document.getElementById('manual-link').innerText = 'click here to view the model';
+            }
         };
     </script>
 </head>
 <body>
     <h1 id="message">Processing COURT50F.usdz...</h1>
-    <div id="ar-container" class="iphone-only">
-        <a href="COURT50F.usdz" rel="ar">
-            <img id="ar-image" src="COURT.JPG" alt="Preview of COURT50F.usdz">
-        </a>
-        <div id="ar-instruction">Tap the image to view <span class="highlight">Fan</span> in AR!</div>
-    </div>
+    <a href="COURT50F.usdz" rel="ar">
+        <img id="ar-image" src="COURT.JPG" alt="Preview of COURT50F.usdz">
+    </a>
+    <div id="ar-instruction">Tap the image to view <span class="highlight">COURT50F.usdz</span> in AR!</div>
     <p>If the action doesn't start, 
         <a href="COURT50F.usdz" rel="ar" id="manual-link">tap here to view in AR</a> or 
         <a href="COURT50F.usdz" download>click here to download</a>.
     </p>
-    <script>
-        // Update manual link text based on device
-        if (/iPhone.*Safari/i.test(navigator.userAgent)) {
-            console.log('Setting manual link text for iPhone Safari');
-            document.getElementById('manual-link').innerHTML = 'tap here to view in <span class="highlight">AR</span>';
-        } else {
-            console.log('Setting manual link text for other devices');
-            document.getElementById('manual-link').innerText = 'click here to view the model';
-        }
-    </script>
 </body>
 </html>
