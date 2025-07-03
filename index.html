@@ -3,7 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Quick Look or Download USDZ</title>
+    <title>AR Quick Look for USDZ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
     <script>
         // JavaScript to trigger AR Quick Look for iPhone Safari or download for others
         window.onload = function() {
@@ -18,7 +42,7 @@
                 link.click();
                 document.body.removeChild(link);
                 // Update message for iPhone users
-                document.getElementById('message').innerText = 'Opening COURT50F in AR Quick Look...';
+                document.getElementById('message').innerText = 'Tap the preview to view COURT50F.usdz in AR!';
             } else {
                 // For other devices, trigger download
                 link.download = 'COURT50F.usdz'; // File name for download
@@ -34,13 +58,13 @@
 <body>
     <h1 id="message">Processing COURT50F.usdz...</h1>
     <p>If the action doesn't start, 
-        <a href="COURT50F.usdz" rel="ar" id="manual-link">click here to view in AR</a> or 
+        <a href="COURT50F.usdz" rel="ar" id="manual-link">tap here to view in AR</a> or 
         <a href="COURT50F.usdz" download>click here to download</a>.
     </p>
     <script>
         // Update manual link text based on device
         if (/iPhone.*Safari/i.test(navigator.userAgent)) {
-            document.getElementById('manual-link').innerText = 'click here to view in AR';
+            document.getElementById('manual-link').innerText = 'tap here to view in AR';
         } else {
             document.getElementById('manual-link').innerText = 'click here to view the model';
         }
