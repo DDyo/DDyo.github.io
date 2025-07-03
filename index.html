@@ -9,7 +9,7 @@
         window.onload = function() {
             const isIphoneSafari = /iPhone.*Safari/i.test(navigator.userAgent);
             const link = document.createElement('a');
-            link.href = 'xxx.usdz'; // Path to your USDZ file
+            link.href = 'COURT50F.usdz'; // Path to your USDZ file
             
             if (isIphoneSafari) {
                 // For iPhone Safari, trigger AR Quick Look
@@ -18,24 +18,24 @@
                 link.click();
                 document.body.removeChild(link);
                 // Update message for iPhone users
-                document.getElementById('message').innerText = 'Opening xxx.usdz in AR Quick Look...';
+                document.getElementById('message').innerText = 'Opening COURT50F in AR Quick Look...';
             } else {
                 // For other devices, trigger download
-                link.download = 'xxx.usdz'; // File name for download
+                link.download = 'COURT50F.usdz'; // File name for download
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
                 // Update message for non-iPhone users
-                document.getElementById('message').innerText = 'Downloading xxx.usdz...';
+                document.getElementById('message').innerText = 'Downloading COURT50F.usdz...';
             }
         };
     </script>
 </head>
 <body>
-    <h1 id="message">Processing xxx.usdz...</h1>
+    <h1 id="message">Processing COURT50F.usdz...</h1>
     <p>If the action doesn't start, 
-        <a href="xxx.usdz" rel="ar" id="manual-link">click here to view in AR</a> or 
-        <a href="xxx.usdz" download>click here to download</a>.
+        <a href="COURT50F.usdz" rel="ar" id="manual-link">click here to view in AR</a> or 
+        <a href="COURT50F.usdz" download>click here to download</a>.
     </p>
     <script>
         // Update manual link text based on device
