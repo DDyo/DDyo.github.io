@@ -37,15 +37,16 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-size: 1.5em;
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.6em;
             font-weight: bold;
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            pointer-events: none; /* Prevents interaction with the message */
         }
         #tap-instruction.show {
             opacity: 1;
@@ -54,13 +55,17 @@
     <script>
         // JavaScript to trigger AR Quick Look for iPhone Safari or download for others
         window.onload = function() {
+            console.log('Page loaded. User agent:', navigator.userAgent);
             setTimeout(function() {
                 const isIphoneSafari = /iPhone.*Safari/i.test(navigator.userAgent);
+                console.log('Is iPhone Safari?', isIphoneSafari);
+                
                 const link = document.createElement('a');
                 link.href = 'COURT50F.usdz'; // Path to your USDZ file
                 
                 if (isIphoneSafari) {
                     // For iPhone Safari, trigger AR Quick Look
+                    console.log('Triggering AR Quick Look for COURT50F.usdz');
                     link.setAttribute('rel', 'ar');
                     document.body.appendChild(link);
                     link.click();
@@ -68,13 +73,16 @@
                     // Show tap instruction
                     const tapInstruction = document.getElementById('tap-instruction');
                     tapInstruction.classList.add('show');
+                    console.log('Showing tap instruction');
                     setTimeout(() => {
                         tapInstruction.classList.remove('show');
-                    }, 3000); // Hide after 3 seconds
+                        console.log('Hiding tap instruction');
+                    }, 5000); // Hide after 5 seconds
                     // Update message for iPhone users
                     document.getElementById('message').innerHTML = 'Tap the preview to view <span class="highlight">COURT50F.usdz</span> in AR!';
                 } else {
                     // For other devices, trigger download
+                    console.log('Triggering download for COURT50F.usdz');
                     link.download = 'COURT50F.usdz'; // File name for download
                     document.body.appendChild(link);
                     link.click();
@@ -82,7 +90,7 @@
                     // Update message for non-iPhone users
                     document.getElementById('message').innerText = 'Downloading COURT50F.usdz...';
                 }
-            }, 500); // 500ms delay to ensure page load
+            }, 1000); // 1000ms delay to ensure page load
         };
     </script>
 </head>
@@ -96,8 +104,10 @@
     <script>
         // Update manual link text based on device
         if (/iPhone.*Safari/i.test(navigator.userAgent)) {
+            console.log('Setting manual link text for iPhone Safari');
             document.getElementById('manual-link').innerHTML = 'tap here to view in <span class="highlight">AR</span>';
         } else {
+            console.log('Setting manual link text for other devices');
             document.getElementById('manual-link').innerText = 'click here to view the model';
         }
     </script>
