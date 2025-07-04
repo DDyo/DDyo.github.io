@@ -48,7 +48,11 @@
         }
     </style>
     <script>
-            
+            // JavaScript to log user agent and update link text
+        window.onload = function() {
+            console.log('Page loaded. User agent:', navigator.userAgent);
+            const isIphoneSafari = /iPhone.*Safari/i.test(navigator.userAgent);
+            console.log('Is iPhone Safari?', isIphoneSafari);
             // Update message and instruction
             document.getElementById('message').innerHTML = 'Former Fanling Magistracy';
             document.getElementById('ar-instruction').innerHTML = 'Tap the image to view Former Fanling Magistracy in AR!';
@@ -65,7 +69,6 @@
     </script>
 </head>
 <body>
-    <h1 id="message">Processing COURT50F.usdz...</h1>
     <a href="COURT50F.usdz" rel="ar">
         <img id="ar-image" src="COURT.JPG" alt="Preview of COURT50F.usdz">
     </a>
